@@ -1,0 +1,31 @@
+<script src="index.js" ></script>
+
+<h1>Sentimental Extraction</h1>
+
+  <input type="text" name="text" id="text"><br>
+  <input type="radio" name="sentiment" value="positive" id="sentiment">positive <br>
+  <input type="radio" name="sentiment" value="negative">negative <br>
+  <input type="radio" name="sentiment" value="neutral">neutral <br>
+  <input type="button" onclick="extract_text()" value="submit"> <br><br><br>
+
+<div id="demo">Extracted Text </div>
+
+<script>
+  function extract_text() {
+    text=document.getElementById("text").value
+    sentiment=document.getElementById("sentiment").value
+    var xhr = new XMLHttpRequest();
+    var url = "/extract/";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = JSON.parse(xhr.responseText);
+            document.getElementById("demo").innerHTML = json.extract;
+        }
+    };
+    var data = JSON.stringify({"text": text, "sentiment": sentiment});
+    xhr.send(data);
+  }
+</script>
+  
