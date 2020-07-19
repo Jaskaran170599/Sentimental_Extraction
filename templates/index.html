@@ -12,8 +12,15 @@
 
 <script>
   function extract_text() {
+    document.getElementById("demo").innerHTML = "Processing...";
     text=document.getElementById("text").value
-    sentiment=document.getElementById("sentiment").value
+    var sentiments = document.getElementsByName('sentiment');
+    var sentiment;
+    for(var i = 0; i < sentiments.length; i++){
+        if(sentiments[i].checked){
+          sentiment = sentiments[i].value;
+        }
+    }
     var xhr = new XMLHttpRequest();
     var url = "/extract/";
     xhr.open("POST", url, true);

@@ -3,8 +3,6 @@ from transformers import *
 import tokenizers
 
 import numpy as np
-import sentencepiece as spm
-import sentencepiece_pb2 as spt
 from tensorflow.keras.layers import *
 from tensorflow.keras.models import *
 
